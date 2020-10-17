@@ -237,10 +237,12 @@
                 //this.dialogVisible=false;
             },
             del(){
+                var id = [this.dataList.id]
+                console.log("id",id)
                 this.$http({
-                    url: this.$http.adornUrl('/food/info/del/food'),
+                    url: this.$http.adornUrl('/food/info/delete/food'),
                     method: 'delete',
-                    data: this.dataList.id
+                    data: this.$http.adornData(id, false)
                 }).then(({data})=>{
                     if (data && data.code === 0){
                         this.$message({
@@ -248,6 +250,7 @@
                             type: "success"
                         });
                         this.dialogVisible = false
+                        this.getSpecila();
                     }else {
                         this.$message.error(data.msg);
                     }
